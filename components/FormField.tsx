@@ -16,18 +16,38 @@ interface FormFieldProps<T extends FieldValues> {
     type?: 'text'|'email'|'password'|'file';
 }
 
-const FormField = ({control, name, label, placeholder, type="text"}: FormFieldProps<T>) => (
-    <Controller name={name} control={control} render={({ field }) => (
-        <FormItem>
-            <FormLabel className='label'>{label}</FormLabel>
-            <FormControl>
-                <Input className='input' type={type} placeholder={placeholder} {...field} />
-            </FormControl>
-            <FormMessage />
-        </FormItem>
-    )} >
+// const FormField = ({control, name, label, placeholder, type="text"}: FormFieldProps<T>) => (
+//     <Controller name={name} control={control} render={({ field }) => (
+//         <FormItem>
+//             <FormLabel className='label'>{label}</FormLabel>
+//             <FormControl>
+//                 <Input className='input' type={type} placeholder={placeholder} {...field} />
+//             </FormControl>
+//             <FormMessage />
+//         </FormItem>
+//     )} >
 
-    </Controller>
-)
+//     </Controller>
+// )
+
+function FormField<T extends FieldValues>({
+    control,
+    name,
+    label,
+    placeholder,
+    type = "text"
+}: FormFieldProps<T>) {
+    return (
+        <Controller name={name} control={control} render={({ field }) => (
+            <FormItem>
+                <FormLabel className='label'>{label}</FormLabel>
+                <FormControl>
+                    <Input className='input' type={type} placeholder={placeholder} {...field} />
+                </FormControl>
+                <FormMessage />
+            </FormItem>
+        )} />
+    );
+}
 
 export default FormField;
